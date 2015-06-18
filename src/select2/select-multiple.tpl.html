@@ -1,4 +1,5 @@
-<div class="ui-select-container ui-select-multiple select2 select2-container select2-container-multi"
+<div class="ui-select-container ui-select-multiple select2 select2-container
+            select2-container-multi {{ $select.containerCssClass }}"
      ng-class="{'select2-container-active select2-dropdown-open open': $select.open,
                 'select2-container-disabled': $select.disabled}">
   <ul class="select2-choices">
@@ -25,7 +26,7 @@
         ondrop="return false;">
     </li>
   </ul>
-  <div class="ui-select-dropdown select2-drop select2-with-searchbox select2-drop-active"
+  <div class="ui-select-dropdown select2-drop select2-with-searchbox select2-drop-active {{ $select.dropdownCssClass }}"
        ng-class="{'select2-display-none': !$select.open}">
     <div class="ui-select-choices"></div>
   </div>

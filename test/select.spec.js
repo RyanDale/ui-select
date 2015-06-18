@@ -2031,4 +2031,78 @@ describe('ui-select tests', function() {
     });
   });
 
+  describe('container-css-class and dropdown-css-class options', function() {
+    var el,
+        selectContainerClass = 'select-container-class',
+        selectDropdownClass = 'select-dropdown-class',
+        selectContainerHtml = 'container-css-class="' + selectContainerClass + '" ',
+        selectDropdownHtml = 'dropdown-css-class="' + selectDropdownClass + '" ';
+
+    function setupSelectComponent(theme, attrsHtml) {
+      el = compileTemplate(
+          '<ui-select ng-model="selection.selected" theme="' + theme + '" ' + attrsHtml + '> \
+          <ui-select-match placeholder="Pick one...">{{$select.selected.name}}</ui-select-match> \
+          <ui-select-choices repeat="person in people | filter: $select.search"> \
+            <div ng-bind-html="person.name | highlight: $select.search"></div> \
+            <div ng-bind-html="person.email | highlight: $select.search"></div> \
+          </ui-select-choices> \
+        </ui-select>'
+      );
+    }
+
+    describe('selectize theme', function() {
+      it('should have the container class added to the directive when the option is provided', function() {
+        setupSelectComponent('selectize', selectContainerHtml);
+        expect($(el)).toHaveClass(selectContainerClass);
+      });
+
+      it('should have the dropdown class added to the directive\'s dropdown when the option is provided', function() {
+        setupSelectComponent('selectize', selectDropdownHtml);
+        expect($(el).find('.ui-select-dropdown')).toHaveClass(selectDropdownClass);
+      });
+
+      it('should have both the container and dropdown classes added to the directive when both options are provided', function() {
+        setupSelectComponent('selectize', selectContainerHtml + selectDropdownHtml);
+        expect($(el)).toHaveClass(selectContainerClass);
+        expect($(el).find('.ui-select-dropdown')).toHaveClass(selectDropdownClass);
+      });
+    });
+
+    describe('select2 theme', function() {
+      it('should have the container class added to the directive when the option is provided', function() {
+        setupSelectComponent('select2', selectContainerHtml);
+        expect($(el)).toHaveClass(selectContainerClass);
+      });
+
+      it('should have the dropdown class added to the directive\'s dropdown when the option is provided', function() {
+        setupSelectComponent('select2', selectDropdownHtml);
+        expect($(el).find('.ui-select-dropdown')).toHaveClass(selectDropdownClass);
+      });
+
+      it('should have both the container and dropdown classes added to the directive when both options are provided', function() {
+        setupSelectComponent('select2', selectContainerHtml + selectDropdownHtml);
+        expect($(el)).toHaveClass(selectContainerClass);
+        expect($(el).find('.ui-select-dropdown')).toHaveClass(selectDropdownClass);
+      });
+    });
+
+    describe('bootstrap theme', function() {
+      it('should have the container class added to the directive when the option is provided', function() {
+        setupSelectComponent('bootstrap', selectContainerHtml);
+        expect($(el)).toHaveClass(selectContainerClass);
+      });
+
+      it('should have the dropdown class added to the directive\'s dropdown when the option is provided', function() {
+        setupSelectComponent('bootstrap', selectDropdownHtml);
+        expect($(el).find('.ui-select-dropdown')).toHaveClass(selectDropdownClass);
+      });
+
+      it('should have both the container and dropdown classes added to the directive when both options are provided', function() {
+        setupSelectComponent('bootstrap', selectContainerHtml + selectDropdownHtml);
+        expect($(el)).toHaveClass(selectContainerClass);
+        expect($(el).find('.ui-select-dropdown')).toHaveClass(selectDropdownClass);
+      });
+    });
+
+  });
 });
